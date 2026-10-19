@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>out&amp;abt — Discover Your City</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:        #4B9B7C;
+      --green-dark:   #3a7a61;
+      --green-bg:     #EBF5F0;
+      --green-glow:   rgba(75,155,124,0.20);
+      --cream:        #F5F2EC;
+      --cream-2:      #EDE9E0;
+      --black:        #0C0C0C;
+      --text:         #1A1A1A;
+      --text-2:       #52525B;
+      --text-3:       #A1A1AA;
+      --white:        #FFFFFF;
+      --phone-border: #1C1C1E;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAVIGATION ─────────────────────────────── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 52px;
+      background: rgba(12,12,12,0.82);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-logo {
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.6px;
+      text-decoration: none;
+    }
+    .nav-logo .amp { color: var(--green); }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 36px;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* ─── HERO ───────────────────────────────────── */
+    .hero {
+      background: var(--cream);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 150px 48px 96px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 80%, rgba(75,155,124,0.10) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 30% at 10% 10%, rgba(75,155,124,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--green-bg);
+      color: var(--green-dark);
+      border: 1px solid rgba(75,155,124,0.25);
+      padding: 6px 18px;
+      border-radius: 100px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .hero-title {
+      font-size: clamp(68px, 10.5vw, 128px);
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -5px;
+      line-height: 0.92;
+      margin-bottom: 22px;
+      position: relative;
+    }
+    .hero-title .amp { color: var(--green); }
+
+    .hero-sub {
+      font-size: clamp(16px, 1.9vw, 21px);
+      color: var(--text-2);
+      font-weight: 400;
+      line-height: 1.55;
+      margin-bottom: 56px;
+      max-width: 430px;
+      position: relative;
+    }
+
+    .hero-image {
+      width: 100%;
+      max-width: 980px;
+      border-radius: 22px;
+      overflow: hidden;
+      position: relative;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.07),
+        0 40px 100px rgba(0,0,0,0.18),
+        0 0 60px var(--green-glow);
+    }
+    .hero-image img { width: 100%; display: block; }
+
+    /* ─── SHARED SECTION PRIMITIVES ──────────────── */
+    .eyebrow {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .eyebrow-light { background: var(--green-bg);               color: var(--green-dark); }
+    .eyebrow-dark  { background: rgba(75,155,124,0.14);         color: var(--green);      }
+
+    .s-title {
+      font-size: clamp(30px, 3.8vw, 50px);
+      font-weight: 800;
+      letter-spacing: -1.7px;
+      line-height: 1.05;
+    }
+
+    .s-sub {
+      font-size: 17px;
+      line-height: 1.68;
+      max-width: 530px;
+    }
+
+    /* ─── VIDEO SECTION ──────────────────────────── */
+    .sec-video {
+      background: var(--black);
+      padding: 108px 48px 120px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sec-video::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(75,155,124,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .sec-video .s-title  { color: var(--white); margin-bottom: 12px; position: relative; }
+    .sec-video .s-sub    { color: rgba(255,255,255,0.42); margin: 0 auto 52px; position: relative; }
+
+    .video-phone {
+      max-width: 308px;
+      margin: 0 auto;
+      position: relative;
+      border-radius: 52px;
+      border: 10px solid #242424;
+      box-shadow:
+        0 0 0 1px #333,
+        0 56px 130px rgba(0,0,0,0.65),
+        0 0 80px var(--green-glow);
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video-phone video {
+      width: 100%;
+      display: block;
+    }
+
+    /* ─── SCREENS SECTION ────────────────────────── */
+    .sec-screens {
+      background: var(--cream);
+      padding: 108px 48px;
+    }
+
+    .sec-screens-header {
+      max-width: 1160px;
+      margin: 0 auto 64px;
+    }
+    .sec-screens-header .s-title { color: var(--text); margin-bottom: 12px; }
+    .sec-screens-header .s-sub   { color: var(--text-2); }
+
+    .screens-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 52px 32px;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .screen-card {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .phone-frame {
+      border-radius: 48px;
+      border: 9px solid var(--phone-border);
+      box-shadow:
+        0 0 0 1px #2e2e2e,
+        0 32px 88px rgba(0,0,0,0.16),
+        0 4px 18px rgba(0,0,0,0.09);
+      overflow: hidden;
+      background: var(--phone-border);
+    }
+    .phone-frame img { width: 100%; display: block; }
+
+    .screen-meta { padding: 0 4px; }
+
+    .screen-tag {
+      display: inline-block;
+      background: var(--green-bg);
+      color: var(--green-dark);
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .screen-name {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      color: var(--text);
+    }
+
+    /* ─── FOOTER ─────────────────────────────────── */
+    footer {
+      background: var(--black);
+      padding: 64px 48px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-logo {
+      font-size: 40px;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -1.8px;
+      margin-bottom: 10px;
+    }
+    .footer-logo .amp { color: var(--green); }
+
+    .footer-meta {
+      font-size: 13px;
+      color: rgba(255,255,255,0.30);
+      letter-spacing: 0.2px;
+    }
+
+    /* ─── DIVIDER ────────────────────────────────── */
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 0 48px;
+      background: var(--cream);
+    }
+    .divider-line {
+      flex: 1;
+      max-width: 480px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent);
+    }
+    .divider-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      opacity: 0.5;
+    }
+
+    /* ─── SCROLL ANIMATIONS ──────────────────────── */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+    }
+    [data-reveal].revealed      { opacity: 1; transform: none; }
+    [data-reveal][data-d="1"]   { transition-delay: .07s; }
+    [data-reveal][data-d="2"]   { transition-delay: .14s; }
+    [data-reveal][data-d="3"]   { transition-delay: .21s; }
+    [data-reveal][data-d="4"]   { transition-delay: .28s; }
+    [data-reveal][data-d="5"]   { transition-delay: .35s; }
+    [data-reveal][data-d="6"]   { transition-delay: .42s; }
+
+    /* ─── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 1040px) {
+      .screens-grid  { grid-template-columns: repeat(2, 1fr); gap: 40px 28px; }
+    }
+
+    @media (max-width: 700px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero, .sec-video, .sec-screens { padding-left: 24px; padding-right: 24px; }
+      footer { padding: 52px 24px; }
+      .screens-grid  { grid-template-columns: 1fr; max-width: 340px; }
+      .divider { padding: 0 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVIGATION ──────────────────────────────── -->
+  <nav>
+    <a class="nav-logo" href="#">out<span class="amp">&amp;</span>abt</a>
+    <ul class="nav-links">
+      <li><a href="#walkthrough">Walkthrough</a></li>
+      <li><a href="#screens">Screens</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-eyebrow">Senior Project</div>
+    <h1 class="hero-title">out<span class="amp">&amp;</span>abt</h1>
+    <p class="hero-sub">Discover what's around you. Check in. Explore your city like never before.</p>
+    <div class="hero-image">
+      <img src="outnabt-cover.png" alt="out&amp;abt — app screens" />
+    </div>
+  </section>
+
+  <!-- ── WALKTHROUGH VIDEO ────────────────────────── -->
+  <section class="sec-video" id="walkthrough">
+    <div class="eyebrow eyebrow-dark" data-reveal>Full Walkthrough</div>
+    <h2 class="s-title" data-reveal data-d="1">See it in action</h2>
+    <p class="s-sub" data-reveal data-d="2">
+      A complete walkthrough of the out&amp;abt experience — from browsing the feed to checking in at a local spot.
+    </p>
+    <div class="video-phone" data-reveal data-d="3">
+      <video controls playsinline preload="metadata">
+        <source src="walkthrough.MP4" type="video/mp4" />
+      </video>
+    </div>
+  </section>
+
+  <!-- ── APP SCREENS ──────────────────────────────── -->
+  <section class="sec-screens" id="screens">
+    <div class="sec-screens-header" data-reveal>
+      <div class="eyebrow eyebrow-light">App Screens</div>
+      <h2 class="s-title">Every view, crafted with care</h2>
+      <p class="s-sub">Six core screens designed to help people find, save, and check in to the best spots in their city.</p>
+    </div>
+
+    <div class="screens-grid">
+
+      <div class="screen-card" data-reveal data-d="1">
+        <div class="phone-frame">
+          <img src="feed.PNG" alt="Feed screen" />
+        </div>
+        <div class="screen-meta">
+          <div class="screen-tag">Discovery</div>
+          <div class="screen-name">Feed</div>
+        </div>
+      </div>
+
+      <div class="screen-card" data-reveal data-d="2">
+        <div class="phone-frame">
+          <img src="map.PNG" alt="Map explore screen" />
+        </div>
+        <div class="screen-meta">
+          <div class="screen-tag">Explore</div>
+          <div class="screen-name">Map View</div>
+        </div>
+      </div>
+
+      <div class="screen-card" data-reveal data-d="3">
+        <div class="phone-frame">
+          <img src="list.PNG" alt="List explore screen" />
+        </div>
+        <div class="screen-meta">
+          <div class="screen-tag">Explore</div>
+          <div class="screen-name">List View</div>
+        </div>
+      </div>
+
+      <div class="screen-card" data-reveal data-d="4">
+        <div class="phone-frame">
+          <img src="description.PNG" alt="Place detail screen" />
+        </div>
+        <div class="screen-meta">
+          <div class="screen-tag">Place Detail</div>
+          <div class="screen-name">Place Details</div>
+        </div>
+      </div>
+
+      <div class="screen-card" data-reveal data-d="5">
+        <div class="phone-frame">
+          <img src="boards.PNG" alt="Saved boards screen" />
+        </div>
+        <div class="screen-meta">
+          <div class="screen-tag">Saved</div>
+          <div class="screen-name">Boards</div>
+        </div>
+      </div>
+
+      <div class="screen-card" data-reveal data-d="6">
+        <div class="phone-frame">
+          <img src="profile.PNG" alt="Profile and passport screen" />
+        </div>
+        <div class="screen-meta">
+          <div class="screen-tag">Profile</div>
+          <div class="screen-name">Profile &amp; Passport</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────────────── -->
+  <footer>
+    <div class="footer-logo">out<span class="amp">&amp;</span>abt</div>
+    <p class="footer-meta">Senior Project &mdash; Drexel University</p>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('revealed');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+
+    document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+  </script>
+
+</body>
+</html>
